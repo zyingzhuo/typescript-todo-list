@@ -1,24 +1,43 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
+import SingleTodo from './components/single';
+
+// type Todo={
+//   title:string
+// }
+
+// type Todos={
+//   todos:Todo[]
+// }
 
 function App() {
+  const [todos, setTodos]=useState<string[]>([])
+  const[todo, setTodo]=useState<string>("")
+
+  const onSubmit=(e:React.FormEvent<HTMLFormElement>)=>{
+    e.preventDefault()
+    if(!todo) {
+      alert('please enter a todo')
+    } else{
+      setTodos([...todos,todo])
+      setTodo("")
+    }
+
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <form onSubmit={onSubmit}>
+          <input placeholder='add to do'
+          value={todo}
+          onChange={(e)=>setTodo(e.target.value)}
+          />
+          <button>Add</button>
+        </form>
+    {todos?.map((todo)=>(
+      <SingleTodo todo={todo}/>
+    ))}
     </div>
   );
 }
