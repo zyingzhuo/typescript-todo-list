@@ -26,6 +26,9 @@ function App() {
     }
 
   }
+
+  
+
   return (
     <div className="App">
         <form onSubmit={onSubmit}>
@@ -36,7 +39,7 @@ function App() {
           <button>Add</button>
         </form>
     {todos?.map((todo)=>(
-      <SingleTodo todo={todo}/>
+      <SingleTodo todo={todo} todos={todos} setTodos={setTodos} />
     ))}
     </div>
   );
