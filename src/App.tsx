@@ -12,9 +12,10 @@ import SingleTodo from './components/single';
 //   todos:Todo[]
 // }
 
-function App() {
-  const [todos, setTodos]=useState<string[]>([])
-  const[todo, setTodo]=useState<string>("")
+
+function App () {
+   const [todos, setTodos]=useState<string[]>([])
+  const [todo, setTodo]=useState("")
 
   const onSubmit=(e:React.FormEvent<HTMLFormElement>)=>{
     e.preventDefault()
@@ -32,17 +33,18 @@ function App() {
   return (
     <div className="App">
         <form onSubmit={onSubmit}>
-          <input placeholder='add to do'
-          value={todo}
-          onChange={(e)=>setTodo(e.target.value)}
-          />
-          <button>Add</button>
+            <input placeholder='add to do'
+            value={todo}
+            onChange={(e)=>setTodo(e.target.value)}
+            />
+            <button>Add</button>
         </form>
-    {todos?.map((todo)=>(
-      <SingleTodo todo={todo} todos={todos} setTodos={setTodos} />
-    ))}
+        
+      {todos?.map((todo,index)=>(
+        <SingleTodo todo={todo} todos={todos} setTodos={setTodos} setTodo={setTodo} index={index}/>
+      ))}
     </div>
   );
-}
 
+    }
 export default App;
